@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIÊU CÂU LỆNH PRO MAX - Game Phản Xạ Tốc Độ 3D</title>
+    <meta name="description" content="Game phản xạ tốc độ 3D chuyên nghiệp với hiệu ứng cao cấp, 5 levels độ khó, leaderboard và âm thanh sống động.">
+    <meta name="keywords" content="game phản xạ, tốc độ, 3D, reaction game, speed test, vietnamese game">
+    <meta name="author" content="Reaction Game Pro Max">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="SIÊU CÂU LỆNH PRO MAX - Game Phản Xạ Tốc Độ 3D">
+    <meta property="og:description" content="Game phản xạ tốc độ 3D chuyên nghiệp với hiệu ứng cao cấp">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourusername.github.io/reaction-game-pro-max/">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎮</text></svg>">
+    
+    <link rel="stylesheet" href="reaction-game-style.css">
+</head>
+<body>
+    <!-- Canvas cho particle effects -->
+    <canvas id="particleCanvas" class="particle-canvas"></canvas>
+    
+    <!-- Background gradient động -->
+    <div class="gradient-bg"></div>
+    
+    <!-- Theme Toggle Button -->
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <span class="theme-icon">🌙</span>
+    </button>
+    
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Welcome Screen -->
+        <div class="welcome-screen" id="welcomeScreen">
+            <div class="welcome-card">
+                <h1 class="game-title">🎮 SIÊU CÂU LỆNH PRO MAX</h1>
+                <p class="game-subtitle">PHẢN XẠ TỐC ĐỘ 3D</p>
+                <div class="player-input">
+                    <input type="text" id="playerName" placeholder="Nhập tên của bạn..." maxlength="20" aria-label="Player name">
+                    <button class="start-btn" id="startBtn">BẮT ĐẦU CHƠI</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Game Screen -->
+        <div class="game-screen hidden" id="gameScreen">
+            <!-- Game Header -->
+            <header class="game-header">
+                <div class="player-info">
+                    <span class="player-name" id="displayName">Player</span>
+                    <span class="level-badge">Level <span id="currentLevel">1</span></span>
+                </div>
+                <div class="game-stats">
+                    <div class="stat-item">
+                        <span class="stat-label">Điểm</span>
+                        <span class="stat-value" id="score">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Thời Gian</span>
+                        <span class="stat-value" id="timer">0</span>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Progress Bar -->
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+            </div>
+            
+            <!-- Game Area -->
+            <main class="game-area">
+                <div class="game-card" id="gameCard" role="button" tabindex="0" aria-label="Game area - click when signal appears">
+                    <div class="game-content" id="gameContent">
+                        <div class="waiting-state" id="waitingState">
+                            <div class="pulse-animation">
+                                <span class="waiting-text">CHỜ TÍN HIỆU...</span>
+                                <div class="loading-dots">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="signal-state hidden" id="signalState">
+                            <div class="signal-animation">
+                                <span class="signal-text">CLICK!</span>
+                                <div class="glow-effect"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="result-state hidden" id="resultState">
+                            <div class="result-content">
+                                <div class="reaction-time" id="reactionTime">0ms</div>
+                                <div class="reaction-rating" id="reactionRating">Bình Thường</div>
+                                <button class="continue-btn" id="continueBtn">TIẾP TỤC</button>
+                            </div>
+                        </div>
+                        
+                        <div class="too-soon-state hidden" id="tooSoonState">
+                            <div class="too-soon-content">
+                                <span class="too-soon-text">QUÁ SỚM! 😅</span>
+                                <button class="retry-btn" id="retryBtn">THỬ LẠI</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Multi-target areas cho level cao -->
+                <div class="multi-target-container hidden" id="multiTargetContainer">
+                    <!-- Dynamic targets sẽ được thêm vào bằng JavaScript -->
+                </div>
+            </main>
+            
+            <!-- Level Up Animation -->
+            <div class="level-up-animation hidden" id="levelUpAnimation" role="alert" aria-live="polite">
+                <div class="level-up-content">
+                    <span class="level-up-text">LEVEL UP!</span>
+                    <span class="new-level">Level <span id="newLevel">2</span></span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Leaderboard -->
+        <aside class="leaderboard" id="leaderboard">
+            <div class="leaderboard-header">
+                <h2>🏆 BẢNG XẾP HẠNG</h2>
+                <button class="reset-btn" id="resetLeaderboard" aria-label="Reset leaderboard">Reset</button>
+            </div>
+            <div class="leaderboard-list" id="leaderboardList" role="list">
+                <!-- Dynamic leaderboard entries -->
+            </div>
+        </aside>
+        
+        <!-- Game Over Modal -->
+        <div class="modal-overlay hidden" id="gameOverModal" role="dialog" aria-modal="true" aria-labelledby="gameOverTitle">
+            <div class="modal-content">
+                <h2 id="gameOverTitle">🎮 KẾT THÚC GAME</h2>
+                <div class="final-stats">
+                    <div class="final-stat">
+                        <span class="stat-label">Điểm Cuối Cùng:</span>
+                        <span class="stat-value" id="finalScore">0</span>
+                    </div>
+                    <div class="final-stat">
+                        <span class="stat-label">Level Đạt Được:</span>
+                        <span class="stat-value" id="finalLevel">1</span>
+                    </div>
+                    <div class="final-stat">
+                        <span class="stat-label">Phản Xạ Nhanh Nhất:</span>
+                        <span class="stat-value" id="bestReaction">0ms</span>
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button class="play-again-btn" id="playAgainBtn">CHƠI LẠI</button>
+                    <button class="home-btn" id="homeBtn">MÀN HÌNH CHÍNH</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Audio Elements -->
+    <audio id="startSound" preload="auto"></audio>
+    <audio id="signalSound" preload="auto"></audio>
+    <audio id="successSound" preload="auto"></audio>
+    <audio id="failSound" preload="auto"></audio>
+    <audio id="levelUpSound" preload="auto"></audio>
+    
+    <script src="reaction-game-script.js"></script>
+</body>
+</html>

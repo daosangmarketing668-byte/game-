@@ -1,0 +1,190 @@
+# ===== OPERATING SYSTEM FILES =====
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# ===== EDITOR FILES =====
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.settings/
+.classpath
+.c9/
+*.launch
+.settings/
+.sublime-project
+.sublime-workspace
+
+# ===== LOG FILES =====
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ===== RUNTIME DATA =====
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# ===== COVERAGE DIRECTORY =====
+coverage/
+*.lcov
+.nyc_output
+
+# ===== DEPENDENCY DIRECTORIES =====
+node_modules/
+jspm_packages/
+
+# ===== OPTIONAL NPM CACHE DIRECTORY =====
+.npm
+
+# ===== OPTIONAL YARN CACHE DIRECTORY =====
+.yarn-integrity
+
+# ===== OPTIONAL REPL HISTORY =====
+.node_repl_history
+
+# ===== OUTPUT OF 'npm pack' =====
+*.tgz
+
+# ===== YARN INTEGRITY FILE =====
+.yarn-integrity
+
+# ===== dotenv ENVIRONMENT VARIABLES FILE =====
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# ===== PARCEL CACHE =====
+.cache
+.parcel-cache
+
+# ===== NEXT.JS =====
+.next/
+
+# ===== NUXT.JS =====
+.nuxt
+
+# ===== GATSBY =====
+.cache/
+public
+
+# ===== VUEPRESS =====
+.vuepress/dist
+
+# ===== SERVERLESS =====
+.serverless/
+
+# ===== FUSEBOX =====
+.fusebox/
+
+# ===== DYNAMODB DB =====
+.dynamodb/
+
+# ===== TERNJS PORT FILE =====
+.tern-port
+
+# ===== BUILT FILES =====
+dist/
+build/
+out/
+
+# ===== TEMPORARY FILES =====
+tmp/
+temp/
+*.tmp
+*.temp
+
+# ===== BACKUP FILES =====
+*.bak
+*.backup
+*.old
+
+# ===== COMPILED BINARY =====
+*.exe
+*.dmg
+*.pkg
+*.deb
+*.rpm
+
+# ===== ARCHIVES =====
+*.zip
+*.tar.gz
+*.rar
+
+# ===== LARGE MEDIA FILES =====
+*.mp4
+*.avi
+*.mov
+*.wmv
+*.flv
+*.webm
+*.mkv
+
+# ===== AUDIO FILES (if not needed in repo) =====
+*.mp3
+*.wav
+*.ogg
+*.flac
+*.aac
+
+# ===== IMAGE FILES (if not needed in repo) =====
+*.psd
+*.ai
+*.sketch
+
+# ===== MICROSOFT OFFICE =====
+*.docx
+*.xlsx
+*.pptx
+*.doc
+*.xls
+*.ppt
+
+# ===== ADOBE =====
+*.indd
+*.pdf
+
+# ===== SYSTEM GENERATED =====
+.DS_Store?
+ehthumbs.db
+Icon?
+Thumbs.db
+
+# ===== SPECIFIC TO THIS PROJECT =====
+# Local development files
+local/
+dev/
+debug/
+
+# Test files
+test-results/
+coverage/
+
+# Documentation build
+docs/_build/
+docs/build/
+
+# IDE specific
+.vscode/settings.json
+.idea/
+
+# OS generated
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
